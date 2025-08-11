@@ -1,0 +1,17 @@
+    <div class="container-fluid main-content min-vh-100 py-5">
+        <div class="row align-items-center justify-content-center">
+            
+            <div class="col-12 col-md-4 text-center profile-img-container">
+                <img src="Fotoprofil.png" alt="Foto Profil Shiddiq" class="img-fluid profile-img">
+            </div>
+
+            <div class="col-12 col-md-6 profile-text">
+                <h1 class="display-3 fw-bold text-brown mt-3 mt-md-0">SHIDDIQ</h1>
+                <p class="lead text-brown fw-normal">Guru, Designer Grafis</p>
+                <p class="lead text-brown fw-normal">082333xxxxxx</p>
+                <p class="lead text-brown fw-normal">Portofolio@gmail.com</p>
+                <p class="lead text-brown fw-normal">Fotografer-Gamers Pro-<br>Designer-Videografer</p>
+            </div>
+
+        </div>
+    </div>
