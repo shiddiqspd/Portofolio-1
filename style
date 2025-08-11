@@ -1,0 +1,31 @@
+<style>
+        body {
+            font-family: sans-serif;
+            background-color: #F8D9A1; /* Warna latar belakang body */
+        }
+        .header-bg {
+            background-color: #A5763D; /* Warna latar belakang header */
+        }
+        .text-brown {
+            color: #A5763D; /* Warna teks coklat */
+        }
+        .profile-img {
+            border-radius: 50%;
+            width: 100%;
+            height: auto;
+            max-width: 300px; /* Ukuran maksimum foto */
+        }
+        .main-content {
+            background-color: #F8D9A1; /* Warna latar belakang konten utama */
+        }
+        /* Custom responsive margin top untuk foto */
+        @media (max-width: 767px) {
+            .profile-img-container {
+                margin-top: 2rem;
+            }
+            .profile-text {
+                text-align: center;
+                margin-top: 1rem;
+            }
+        }
+    </style>
