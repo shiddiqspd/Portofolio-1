@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perulangan: For, While, Do/While</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eaeaea;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+        
+        .loop-section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 4px solid;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        
+        .for-section {
+            border-left-color: #3498db;
+        }
+        
+        .while-section {
+            border-left-color: #e74c3c;
+        }
+        
+        .dowhile-section {
+            border-left-color: #2ecc71;
+        }
+        
+        .section-title {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .description {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .code-container {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+        
+        code {
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+        
+        .controls {
+            margin-top: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn-run {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-run:hover {
+            background: #2980b9;
+        }
+        
+        .btn-reset {
+            background: #95a5a6;
+            color: white;
+        }
+        
+        .btn-reset:hover {
+            background: #7f8c8d;
+        }
+        
+        .output {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 15px;
+            min-height: 100px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .output-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .example-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .comparison {
+            background: #fffde7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border: 1px dashed #fbc02d;
+        }
+        
+        .comparison h3 {
+            color: #f57c00;
+            margin-bottom: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .console-info {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .examples {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔁 Perulangan dalam JavaScript</h1>
+            <p class="subtitle">Implementasi For, While, dan Do/While dalam Program Lengkap</p>
+        </header>
+        
+        <!-- Perulangan FOR -->
+        <section class="loop-section for-section">
+            <h2 class="section-title">🔁 Perulangan FOR</h2>
+            <p class="description">
+                Perulangan FOR digunakan ketika kita sudah tahu berapa kali perulangan akan dilakukan. 
+                Strukturnya terdiri dari: <strong>inisialisasi, kondisi, dan increment/decrement</strong>.
+            </p>
+            
+            <div class="examples">
+                <div class="example-box">
+                    <div class="example-title">Contoh 1: Menghitung 1 sampai 10</div>
+                    <div class="code-container">
+                        <code>for(let i = 1; i <= 10; i++) {<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log("Angka: " + i);<br>}</code>
+                    </div>
+                    <div class="controls">
+                        <button class="btn btn-run" onclick="runForExample1()">Jalankan Contoh 1</button>
+                        <button class="btn btn-reset" onclick="resetForOutput()">Reset Output</button>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <div class="example-title">Contoh 2: Bilangan Genap 1-20</div>
+                    <div class="code-container">
+                        <code>for(let i = 2; i <= 20; i += 2) {<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log("Bilangan genap: " + i);<br>}</code>
+                    </div>
+                    <div class="controls">
+                        <button class="btn btn-run" onclick="runForExample2()">Jalankan Contoh 2</button>
+                        <button class="btn btn-reset" onclick="resetForOutput()">Reset Output</button>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <div class="example-title">Contoh 3: Hitung Mundur 10-1</div>
+                    <div class="code-container">
+                        <code>for(let i = 10; i >= 1; i--) {<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log("Hitungan mundur: " + i);<br>}</code>
+                    </div>
+                    <div class="controls">
+                        <button class="btn btn-run" onclick="runForExample3()">Jalankan Contoh 3</button>
+                        <button class="btn btn-reset" onclick="resetForOutput()">Reset Output</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="output-container">
+                <div class="output-title">Output Perulangan FOR:</div>
+                <div class="output" id="output-for"></div>
+            </div>
+        </section>
+        
+        <!-- Perulangan WHILE -->
+        <section class="loop-section while-section">
+            <h2 class="section-title">🔄 Perulangan WHILE</h2>
+            <p class="description">
+                Perulangan WHILE digunakan ketika jumlah perulangan tidak pasti dan bergantung pada suatu kondisi. 
+                Pengecekan kondisi dilakukan <strong>sebelum</strong> eksekusi blok kode.
+            </p>
+            
+            <div class="examples">
+                <div class="example-box">
+                    <div class="example-title">Contoh 1: Menghitung hingga 5</div>
+                    <div class="code-container">
+                        <code>let counter = 1;<br>while(counter <= 5) {<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log("Counter: " + counter);<br>&nbsp;&nbsp;&nbsp;&nbsp;counter++;<br>}</code>
+                    </div>
+                    <div class="controls">
+                        <button class="btn btn-run" onclick="runWhileExample1()">Jalankan Contoh 1</button>
+                        <button class="btn btn-reset" onclick="resetWhileOutput()">Reset Output</button>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <div class="example-title">Contoh 2: Simulasi Login</div>
+                    <div class="code-container">
+                        <code>let password = "";<br>let attempts = 0;<br>while(password !== "rahasia123" && attempts < 3) {<br>&nbsp;&nbsp;&nbsp;&nbsp;password = prompt("Masukkan password:");<br>&nbsp;&nbsp;&nbsp;&nbsp;attempts++;<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log("Percobaan ke-" + attempts);<br>}</code>
+                    </div>
+                    <div class="controls">
+                        <button class="btn btn-run" onclick="runWhileExample2()">Jalankan Contoh 2</button>
+                        <button class="btn btn-reset" onclick="resetWhileOutput()">Reset Output</button>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <div class="example-title">Contoh 3: Pengurangan hingga 0</div>
+                    <div class="code-container">
+                        <code>let angka = 10;<br>while(angka > 0) {<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log("Angka saat ini: " + angka);<br>&nbsp;&nbsp;&nbsp;&nbsp;angka -= 2;<br>}</code>
+                    </div>
+                    <div class="controls">
+                        <button class="btn btn-run" onclick="runWhileExample3()">Jalankan Contoh 3</button>
+                        <button class="btn btn-reset" onclick="resetWhileOutput()">Reset Output</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="output-container">
+                <div class="output-title">Output Perulangan WHILE:</div>
+                <div class="output" id="output-while"></div>
+            </div>
+        </section>
+        
+        <!-- Perulangan DO/WHILE -->
+        <section class="loop-section dowhile-section">
+            <h2 class="section-title">🔂 Perulangan DO/WHILE</h2>
+            <p class="description">
+                Perulangan DO/WHILE mirip dengan WHILE, namun blok kode akan dieksekusi <strong>minimal sekali</strong> 
+                karena pengecekan kondisi dilakukan <strong>setelah</strong> eksekusi.
+            </p>
+            
+            <div class="examples">
+                <div class="example-box">
+                    <div class="example-title">Contoh 1: Eksekusi minimal sekali</div>
+                    <div class="code-container">
+                        <code>let i = 10;<br>do {<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log("Nilai i: " + i);<br>&nbsp;&nbsp;&nbsp;&nbsp;i++;<br>} while(i < 5);</code>
+                    </div>
+                    <div class="controls">
+                        <button class="btn btn-run" onclick="runDoWhileExample1()">Jalankan Contoh 1</button>
+                        <button class="btn btn-reset" onclick="resetDoWhileOutput()">Reset Output</button>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <div class="example-title">Contoh 2: Validasi input pengguna</div>
+                    <div class="code-container">
+                        <code>let jawaban;<br>do {<br>&nbsp;&nbsp;&nbsp;&nbsp;jawaban = prompt("Apakah Anda setuju? (ya/tidak)");<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log("Jawaban: " + jawaban);<br>} while(jawaban !== "ya");</code>
+                    </div>
+                    <div class="controls">
+                        <button class="btn btn-run" onclick="runDoWhileExample2()">Jalankan Contoh 2</button>
+                        <button class="btn btn-reset" onclick="resetDoWhileOutput()">Reset Output</button>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <div class="example-title">Contoh 3: Menampilkan menu</div>
+                    <div class="code-container">
+                        <code>let pilihan;<br>do {<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log("1. Lihat Profil");<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log("2. Ubah Password");<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log("3. Keluar");<br>&nbsp;&nbsp;&nbsp;&nbsp;pilihan = 3; // simulasi pilihan<br>} while(pilihan !== 3);</code>
+                    </div>
+                    <div class="controls">
+                        <button class="btn btn-run" onclick="runDoWhileExample3()">Jalankan Contoh 3</button>
+                        <button class="btn btn-reset" onclick="resetDoWhileOutput()">Reset Output</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="output-container">
+                <div class="output-title">Output Perulangan DO/WHILE:</div>
+                <div class="output" id="output-dowhile"></div>
+            </div>
+        </section>
+        
+        <!-- Perbandingan -->
+        <section class="comparison">
+            <h3>📊 Perbandingan For, While, dan Do/While</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspek</th>
+                        <th>FOR</th>
+                        <th>WHILE</th>
+                        <th>DO/WHILE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Pengecekan Kondisi</strong></td>
+                        <td>Di awal setiap iterasi</td>
+                        <td>Di awal sebelum eksekusi</td>
+                        <td>Di akhir setelah eksekusi</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Jaminan Eksekusi</strong></td>
+                        <td>Tergantung kondisi awal</td>
+                        <td>Bisa tidak pernah dieksekusi</td>
+                        <td>Minimal 1 kali eksekusi</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kapan Digunakan</strong></td>
+                        <td>Jumlah iterasi diketahui</td>
+                        <td>Jumlah iterasi tidak pasti</td>
+                        <td>Minimal eksekusi 1 kali diperlukan</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inisialisasi Counter</strong></td>
+                        <td>Dalam statement for</td>
+                        <td>Sebelum while</td>
+                        <td>Sebelum do/while</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Increment/Decrement</strong></td>
+                        <td>Dalam statement for</td>
+                        <td>Di dalam blok while</td>
+                        <td>Di dalam blok do/while</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Kontrol Utama -->
+        <div style="text-align: center; margin-top: 30px;">
+            <button class="btn btn-run" style="background: #9b59b6; padding: 12px 25px;" onclick="runAllExamples()">
+                🚀 Jalankan Semua Contoh
+            </button>
+            <button class="btn btn-reset" style="background: #e74c3c; padding: 12px 25px;" onclick="resetAllOutputs()">
+                🔄 Reset Semua Output
+            </button>
+        </div>
+        
+        <div class="console-info">
+            💡 <strong>Tips:</strong> Buka Developer Tools (F12) untuk melihat output di Console juga!
+        </div>
+    </div>
+
+    <script>
+        // ========== FUNGSI UMUM ==========
+        
+        function displayOutput(elementId, message) {
+            const outputElement = document.getElementById(elementId);
+            if (outputElement) {
+                outputElement.textContent += message + "\n";
+            }
+            // Juga tampilkan di console browser
+            console.log(message);
+        }
+        
+        function resetOutput(elementId) {
+            const outputElement = document.getElementById(elementId);
+            if (outputElement) {
+                outputElement.textContent = "";
+            }
+        }
+        
+        // ========== PERULANGAN FOR ==========
+        
+        function runForExample1() {
+            resetOutput('output-for');
+            displayOutput('output-for', "=== Contoh 1: Menghitung 1 sampai 10 ===");
+            
+            for(let i = 1; i <= 10; i++) {
+                displayOutput('output-for', "Angka: " + i);
+            }
+        }
+        
+        function runForExample2() {
+            resetOutput('output-for');
+            displayOutput('output-for', "=== Contoh 2: Bilangan Genap 1-20 ===");
+            
+            for(let i = 2; i <= 20; i += 2) {
+                displayOutput('output-for', "Bilangan genap: " + i);
+            }
+        }
+        
+        function runForExample3() {
+            resetOutput('output-for');
+            displayOutput('output-for', "=== Contoh 3: Hitung Mundur 10-1 ===");
+            
+            for(let i = 10; i >= 1; i--) {
+                displayOutput('output-for', "Hitungan mundur: " + i);
+            }
+        }
+        
+        function resetForOutput() {
+            resetOutput('output-for');
+        }
+        
+        // ========== PERULANGAN WHILE ==========
+        
+        function runWhileExample1() {
+            resetOutput('output-while');
+            displayOutput('output-while', "=== Contoh 1: Menghitung hingga 5 ===");
+            
+            let counter = 1;
+            while(counter <= 5) {
+                displayOutput('output-while', "Counter: " + counter);
+                counter++;
+            }
+        }
+        
+        function runWhileExample2() {
+            resetOutput('output-while');
+            displayOutput('output-while', "=== Contoh 2: Simulasi Login ===");
+            displayOutput('output-while', "Catatan: Untuk contoh ini, gunakan console browser");
+            
+            // Simulasi login dengan prompt (akan bekerja jika diaktifkan)
+            let password = "";
+            let attempts = 0;
+            let maxAttempts = 3;
+            let correctPassword = "rahasia123";
+            
+            // Untuk demo, kita simulasikan dengan input tetap
+            displayOutput('output-while', "Simulasi: Password salah 2x, lalu benar");
+            
+            while(password !== correctPassword && attempts < maxAttempts) {
+                attempts++;
+                
+                // Simulasi input
+                if (attempts === 3) {
+                    password = correctPassword;
+                    displayOutput('output-while', "Percobaan ke-" + attempts + ": Password BENAR");
+                } else {
+                    password = "salah";
+                    displayOutput('output-while', "Percobaan ke-" + attempts + ": Password SALAH");
+                }
+            }
+            
+            if (password === correctPassword) {
+                displayOutput('output-while', "Login berhasil!");
+            } else {
+                displayOutput('output-while', "Login gagal! Percobaan habis.");
+            }
+        }
+        
+        function runWhileExample3() {
+            resetOutput('output-while');
+            displayOutput('output-while', "=== Contoh 3: Pengurangan hingga 0 ===");
+            
+            let angka = 10;
+            while(angka > 0) {
+                displayOutput('output-while', "Angka saat ini: " + angka);
+                angka -= 2;
+            }
+            displayOutput('output-while', "Selesai! Angka terakhir: " + angka);
+        }
+        
+        function resetWhileOutput() {
+            resetOutput('output-while');
+        }
+        
+        // ========== PERULANGAN DO/WHILE ==========
+        
+        function runDoWhileExample1() {
+            resetOutput('output-dowhile');
+            displayOutput('output-dowhile', "=== Contoh 1: Eksekusi minimal sekali ===");
+            displayOutput('output-dowhile', "Perhatikan: i dimulai dari 10, kondisi while(i < 5)");
+            
+            let i = 10;
+            do {
+                displayOutput('output-dowhile', "Nilai i: " + i);
+                i++;
+            } while(i < 5); // Kondisi false sejak awal, tapi eksekusi 1x tetap dilakukan
+            
+            displayOutput('output-dowhile', "Setelah do/while: i = " + i);
+        }
+        
+        function runDoWhileExample2() {
+            resetOutput('output-dowhile');
+            displayOutput('output-dowhile', "=== Contoh 2: Validasi input pengguna ===");
+            displayOutput('output-dowhile', "Simulasi: User menjawab 'tidak' 2x, lalu 'ya'");
+            
+            // Simulasi validasi input
+            let jawaban;
+            let percobaan = 0;
+            
+            do {
+                percobaan++;
+                
+                // Simulasi input user
+                if (percobaan === 3) {
+                    jawaban = "ya";
+                } else {
+                    jawaban = "tidak";
+                }
+                
+                displayOutput('output-dowhile', "Percobaan " + percobaan + ": Jawaban = '" + jawaban + "'");
+            } while(jawaban !== "ya");
+            
+            displayOutput('output-dowhile', "User setuju setelah " + percobaan + " percobaan");
+        }
+        
+        function runDoWhileExample3() {
+            resetOutput('output-dowhile');
+            displayOutput('output-dowhile', "=== Contoh 3: Menampilkan menu ===");
+            
+            let pilihan;
+            let tampilMenu = true;
+            
+            do {
+                displayOutput('output-dowhile', "=== MENU UTAMA ===");
+                displayOutput('output-dowhile', "1. Lihat Profil");
+                displayOutput('output-dowhile', "2. Ubah Password");
+                displayOutput('output-dowhile', "3. Keluar");
+                
+                // Simulasi pilihan user
+                pilihan = 3; // User memilih keluar
+                
+                if (pilihan === 1) {
+                    displayOutput('output-dowhile', "Anda memilih: Lihat Profil");
+                } else if (pilihan === 2) {
+                    displayOutput('output-dowhile', "Anda memilih: Ubah Password");
+                } else if (pilihan === 3) {
+                    displayOutput('output-dowhile', "Anda memilih: Keluar");
+                }
+                
+            } while(pilihan !== 3);
+            
+            displayOutput('output-dowhile', "Terima kasih telah menggunakan aplikasi!");
+        }
+        
+        function resetDoWhileOutput() {
+            resetOutput('output-dowhile');
+        }
+        
+        // ========== FUNGSI UTAMA ==========
+        
+        function runAllExamples() {
+            console.clear();
+            console.log("🚀 Menjalankan semua contoh perulangan...\n");
+            
+            // Jalankan semua contoh secara berurutan
+            runForExample1();
+            setTimeout(() => {
+                console.log("\n");
+                runWhileExample1();
+                setTimeout(() => {
+                    console.log("\n");
+                    runDoWhileExample1();
+                    
+                    // Tampilkan pesan selesai
+                    setTimeout(() => {
+                        console.log("\n✅ Semua contoh telah dijalankan!");
+                        alert("Semua contoh perulangan telah dijalankan! Lihat output di halaman dan di Console (F12).");
+                    }, 500);
+                }, 500);
+            }, 500);
+        }
+        
+        function resetAllOutputs() {
+            resetForOutput();
+            resetWhileOutput();
+            resetDoWhileOutput();
+            console.clear();
+            console.log("Semua output telah direset!");
+        }
+        
+        // ========== CONTOH PRAKTIS TAMBAHAN ==========
+        
+        // Fungsi yang bisa dipanggil dari console
+        window.demoPerulangan = function() {
+            console.log("=== DEMO PERULANGAN PRAKTIS ===\n");
+            
+            // Contoh praktis FOR: Menghitung total belanja
+            console.log("1. FOR: Menghitung total belanja");
+            let hargaBarang = [15000, 25000, 10000, 5000];
+            let total = 0;
+            
+            for(let i = 0; i < hargaBarang.length; i++) {
+                total += hargaBarang[i];
+                console.log(`Barang ${i+1}: Rp${hargaBarang[i]}`);
+            }
+            console.log(`Total belanja: Rp${total}\n`);
+            
+            // Contoh praktis WHILE: Menunggu koneksi
+            console.log("2. WHILE: Simulasi koneksi internet");
+            let koneksi = false;
+            let detik = 0;
+            
+            while(!koneksi && detik < 5) {
+                detik++;
+                console.log(`Mencoba koneksi... (${detik} detik)`);
+                // Simulasi: setelah 3 detik, koneksi berhasil
+                if (detik >= 3) {
+                    koneksi = true;
+                    console.log("Koneksi berhasil!");
+                }
+            }
+            console.log("");
+            
+            // Contoh praktis DO/WHILE: Game tebak angka
+            console.log("3. DO/WHILE: Game tebak angka");
+            let angkaRahasia = 7;
+            let tebakan;
+            let percobaan = 0;
+            
+            do {
+                percobaan++;
+                // Simulasi tebakan
+                tebakan = percobaan === 3 ? 7 : percobaan;
+                console.log(`Tebakan ${percobaan}: ${tebakan}`);
+                
+                if (tebakan < angkaRahasia) {
+                    console.log("Terlalu kecil!");
+                } else if (tebakan > angkaRahasia) {
+                    console.log("Terlalu besar!");
+                }
+            } while(tebakan !== angkaRahasia && percobaan < 5);
+            
+            if (tebakan === angkaRahasia) {
+                console.log(`Benar! Angka rahasianya adalah ${angkaRahasia}`);
+                console.log(`Anda menebak dalam ${percobaan} percobaan`);
+            } else {
+                console.log(`Gagal! Angka rahasianya adalah ${angkaRahasia}`);
+            }
+        };
+        
+        // Inisialisasi
+        window.onload = function() {
+            console.log("=== PROGRAM PERULANGAN JAVASCRIPT ===");
+            console.log("Program telah dimuat. Gunakan tombol di halaman untuk menjalankan contoh.");
+            console.log("Atau ketik 'demoPerulangan()' di console untuk demo tambahan.");
+            console.log("=".repeat(50));
+        };
+    </script>
+</body>
+</html>
